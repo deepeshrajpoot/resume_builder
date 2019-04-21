@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  role: MyString
+  duration: MyString
+  description: MyText
+  web_url: MyString
+  resume: one
+
+two:
+  title: MyString
+  role: MyString
+  duration: MyString
+  description: MyText
+  web_url: MyString
+  resume: two

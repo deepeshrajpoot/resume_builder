@@ -1,0 +1,19 @@
+@import "bootstrap";
+@import "tasks";
+
+.text-underline {
+  text-decoration: underline;
+}
+.resume-user-img {
+  border: 1px solid #92a7c5;
+  height: 150px;
+  width: 180px;
+  float: right;
+}
+.section-content, .bg-cust-header {
+  background-color: #8a9dbf;
+  color:#fff;
+}
+.font-14 {
+  font-size: 14px !important;
+}

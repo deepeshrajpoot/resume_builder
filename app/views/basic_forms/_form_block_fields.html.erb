@@ -1,0 +1,30 @@
+<div class="nested-fields">
+  <div style="border:1px solid #00f;padding:2%;" class="mt-2">
+    <div class="form-group">
+      <%= f.select :field_type, options_for_select(FormBlock::FIELDTYPE), {prompt: "Select field type"}, {class: "form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :label, class: "form-control", placeholder: "Write a label here" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :placeholder_text, class: "form-control", placeholder: "Write a placeholder for this field" %>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.check_box :is_required, style: "height:25px;width:25px;" %>
+        <%= f.label :is_required %>
+      </div>
+      <div class="col-md-6">
+        <%= link_to_remove_association "Remove Field", f, class: "btn btn-danger" %>
+      </div>
+    </div>
+    <div id="loc" class="mt-2">
+      <%= f.fields_for :level_one_conditions do |level_one_condition| %>
+        <%= render 'level_one_condition_fields', f: level_one_condition %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'Add Conditional Question', f, :level_one_conditions, class: "btn btn-success btn-sm mb-3 mt-2" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="row mt-5 mb-5">
+    <div class="col-md-12">
+      <div class="card rounded-0">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-9">
+              <p class="mb-0"><strong><%= @resume.name %></strong></p>
+              <p class="mb-0 text-underline text-primary"><span><%= @resume.email %></span></p>
+              <p class="mb-0"><span>+91 <%= @resume.contact %></span></p>
+              <p class="mb-0"><small><%= @resume.address %></small></p>
+              <p class="mb-0"><small><%= "#{@resume.city}, #{@resume.state}, #{@resume.country}, #{@resume.zipcode}" %></small></p>
+            </div>
+            <div class="col-md-3">
+              <%= image_tag @resume.image_url, class: "img-fluid resume-user-img" %>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <div class="section-content pl-3 pt-1 pb-1">
+                <h4 class="font-weight-bold mt-1">Objective</h4>
+              </div>
+              <p class="font-14 mt-2"><%= @resume.objective %></p>
+            </div>
+            <% if @resume.academic_credentials.present? %>
+              <div class="col-12">
+                <div class="section-content pl-3 pt-1 pb-1">
+                  <h4 class="font-weight-bold mt-1">Educational Details</h4>
+                </div>
+                <table class="table table-bordered mt-2">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Course</th>
+                      <th>Year</th>
+                      <th>Percentage</th>
+                      <th>Grade</th>
+                      <th>Board/University</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @resume.academic_credentials.each_with_index do |value, index| %>
+                      <tr>
+                        <td><%= index+1 %></td>
+                        <td><%= value.course %></td>
+                        <td><%= value.year %></td>
+                        <td><%= value.percentage %></td>
+                        <td><%= value.grade %></td>
+                        <td><%= value.board_or_univercity %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            <% end %>
+
+            <% if @resume.skills.present? %>
+              <div class="col-12 mb-4 mt-2">
+                <div class="section-content pl-3 pt-1 pb-1">
+                  <h4 class="font-weight-bold mt-1">My Skills</h4>
+                </div>
+                <p class="mt-3 font-14"><%= @resume.skills.pluck(:name).join(', ') %></p>
+              </div>
+            <% end %>
+
+            <% if @resume.projects.present? %>
+              <div class="col-12">
+                <div class="section-content pl-3 pt-1 pb-1">
+                  <h4 class="font-weight-bold mt-1">Projects Details</h4>
+                </div>
+                <% @resume.projects.each_with_index do |project, index| %>
+                  <div class="card rounded-0 mt-3">
+                    <div class="card-header bg-cust-header rounded-0">
+                      <h6 class="card-title font-weight-bold mb-0"><%= index+1 %>. <%= project.title %></h6>
+                    </div>
+                    <div class="card-body">
+                      <h6 class="mt-2 font-14"><span class="font-weight-bold">Role:</span> <%= project.role %></h6>
+                      <h6 class="mt-2 font-14"><span class="font-weight-bold">Duration:</span> <%= project.duration %></h6>
+                      <h6 class="mt-2 font-14"><span class="font-weight-bold">Url:</span> <span class="text-underline text-primary"><%= project.web_url %></span></h6>
+                      <h6 class="mt-2 font-14"><span class="font-weight-bold">Description:</span> <%= project.description %></h6>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+
+            <% if @resume.achievements.present? %>
+              <div class="col-12 mb-4 mt-4">
+                <div class="section-content pl-3 pt-1 pb-1 mb-3">
+                  <h4 class="font-weight-bold mt-1">My Achievements</h4>
+                </div>
+                <% @resume.achievements.each_with_index do |achievement, index| %>
+                  <p class="mb-0 font-14"><%= index+1 %>. <%= achievement.title %> </p>
+                <% end %>
+              </div>
+            <% end %>
+
+            <% if @resume.hobbies.present? %>
+              <div class="col-12 mb-4 mt-2">
+                <div class="section-content pl-3 pt-1 pb-1">
+                  <h4 class="font-weight-bold mt-1">My Hobbies</h4>
+                </div>
+                <p class="mt-3 font-14"><%= @resume.hobbies.pluck(:name).join(', ') %></p>
+              </div>
+            <% end %>
+
+            <div class="col-12">
+              <div class="card rounded-0 mt-2">
+                <div class="card-header bg-cust-header rounded-0">
+                  <h4 class="card-title font-weight-bold mb-0">Personal Details</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h6 class="font-weight-bold font-14 float-right">Mother :</h6>
+                    </div>
+                    <div class="col-md-9">
+                      <h6 class="font-14 float-left"><%= @resume.mother_name %></h6>
+                    </div>
+                    <div class="col-md-3">
+                      <h6 class="font-weight-bold font-14 float-right">Father :</h6>
+                    </div>
+                    <div class="col-md-9">
+                      <h6 class="font-14 float-left"><%= @resume.father_name %></h6>
+                    </div>
+                    <div class="col-md-3">
+                      <h6 class="font-weight-bold font-14 float-right">Cast :</h6>
+                    </div>
+                    <div class="col-md-9">
+                      <h6 class="font-14 float-left"><%= @resume.cast %></h6>
+                    </div>
+                    <div class="col-md-3">
+                      <h6 class="font-weight-bold font-14 float-right">Relegion :</h6>
+                    </div>
+                    <div class="col-md-9">
+                      <h6 class="font-14 float-left"><%= @resume.relegion %></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <p class="font-14 font-weight-bold mt-4 mb-2">* I hereby declared that all the information provided above are correct.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="print-btn" class="btn btn-success mb-2">Print or Download</button>
+</div>
+
+<script>
+  $("#print-btn").on('click', function(){
+    window.print();
+  });
+</script>
+
+<style type="text/css">
+  @media print {
+    #print-btn {
+      display: none;
+    }
+  }
+</style>

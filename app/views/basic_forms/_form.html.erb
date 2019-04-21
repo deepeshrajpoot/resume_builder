@@ -1,0 +1,93 @@
+<%= form_with(model: basic_form, local: true) do |f| %>
+  <% if basic_form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(basic_form.errors.count, "error") %> prohibited this basic_form from being saved:</h2>
+      
+      <ul>
+      <% basic_form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, id: :basic_form_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, id: :basic_form_description, class: "form-control", rows: "5" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.check_box :is_multistep_form, id: :basic_form_is_multistep_form %>
+    <%= f.label :is_multistep_form? %>
+  </div>
+
+  <div id="multistep_block" style="display:none;">
+    <%= f.fields_for :form_steps do |form_step| %>
+      <%= render 'form_step_fields', f: form_step %>
+    <% end %>
+    <div class="links mb-1">
+      <%= link_to_add_association 'Add Step', f, :form_steps, class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <div id="single_step_block">
+    <div id="form_blocks" class="mt-3">
+      <%= f.fields_for :form_blocks do |form_block| %>
+        <%= render 'form_block_fields', f: form_block %>
+      <% end %>
+      <div class="links mb-1 mt-2">
+        <%= link_to_add_association 'Add Block', f, :form_blocks, class: "btn btn-success" %>
+      </div>
+    </div>
+
+    <div id="multiple_choices">
+      <%= f.fields_for :multiple_choices do |multiple_choice| %>
+        <%= render 'multiple_choice_fields', f: multiple_choice %>
+      <% end %>
+      <div class="links mb-1">
+        <%= link_to_add_association 'Add Multiple', f, :multiple_choices, class: "btn btn-success" %>
+      </div>
+    </div>
+
+    <div id="checkbox_questions">
+      <%= f.fields_for :checkbox_questions do |checkbox_question| %>
+        <%= render 'checkbox_question_fields', f: checkbox_question %>
+      <% end %>
+      <div class="links mb-1">
+        <%= link_to_add_association 'Add Checkbox', f, :checkbox_questions, class: "btn btn-success" %>
+      </div>
+    </div>
+
+    <div id="dropdowns">
+      <%= f.fields_for :dropdowns do |dropdown| %>
+        <%= render 'dropdown_fields', f: dropdown %>
+      <% end %>
+      <div class="links mb-1">
+        <%= link_to_add_association 'Add Dropdown', f, :dropdowns, class: "btn btn-success" %>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script>
+  $("#basic_form_is_multistep_form").on('change', function(){
+    if ($("#basic_form_is_multistep_form").is(":checked")) {
+      $("#multistep_block").show();
+      $("#single_step_block").hide();
+    } else {
+      $("#multistep_block").hide();
+      $("#single_step_block").show();      
+    }
+  });
+</script>

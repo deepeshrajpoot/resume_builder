@@ -1,0 +1,225 @@
+<%= form_with(model: resume, local: true) do |f| %>
+  <% if resume.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(resume.errors.count, "error") %> prohibited this resume from being saved:</h2>
+
+      <ul>
+      <% resume.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mt-2">
+    <%= f.label :Images %>
+    <%= f.file_field :image %>
+    <%= image_tag(@resume.image_url) if @resume.image? %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, id: :resume_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, id: :resume_email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :contact %>
+    <%= f.text_field :contact, id: :resume_contact, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_field :address, id: :resume_address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :city %>
+    <%= f.text_field :city, id: :resume_city, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :state %>
+    <%= f.text_field :state, id: :resume_state, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :country %>
+    <%= f.text_field :country, id: :resume_country, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :zipcode %>
+    <%= f.text_field :zipcode, id: :resume_zipcode, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :objective %> <a href="javascript:void(0)" class="ml-2" data-toggle="modal" data-target="#suggestionBox">Views suggestions for better objectives</a> 
+    <%= f.text_area :objective, id: :resume_objective, class: "form-control", rows: "4" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :gender %>
+    <%= f.text_field :gender, id: :resume_gender, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date_of_birth %>
+    <%= f.date_select :date_of_birth, id: :resume_date_of_birth %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :mother_name %>
+    <%= f.text_field :mother_name, id: :resume_mother_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :father_name %>
+    <%= f.text_field :father_name, id: :resume_father_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cast %>
+    <%= f.text_field :cast, id: :resume_cast, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :relegion %>
+    <%= f.text_field :relegion, id: :resume_relegion, class: "form-control" %>
+  </div>
+
+  <hr>
+  <div id="academic_credentials">
+    <h5 class="font-weight-bold">Add your academic credentials</h5>
+    <%= f.fields_for :academic_credentials do |academic_credential| %>
+      <div class="card rounded-0 mb-3">
+        <div class="card-body">
+          <%= render 'academic_credential_fields', f: academic_credential %>      
+        </div>
+      </div>
+    <% end %>
+    <div class="links mb-1">
+      <%= link_to_add_association 'Add Academic Credentials', f, :academic_credentials, class: "btn btn-success" %>
+    </div> 
+  </div>
+
+  <hr>
+  <div id="achievements">
+    <h5 class="font-weight-bold">Add your personal and professional acheivements</h5>
+    <%= f.fields_for :achievements do |achievement| %>
+      <div class="card rounded-0 mb-3">
+        <div class="card-body">
+          <%= render 'achievement_fields', f: achievement %>         
+        </div>
+      </div>
+    <% end %>
+    <div class="links mb-1">
+      <%= link_to_add_association 'Add Achievements', f, :achievements, class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <hr>
+  <div id="projects">
+    <h5 class="font-weight-bold">Add your projects which can help to make a good impressive resume</h5>
+    <%= f.fields_for :projects do |project| %>
+      <div class="card rounded-0 mb-3">
+        <div class="card-body">
+          <%= render 'project_fields', f: project %>         
+        </div>
+      </div>
+    <% end %>
+    <div class="links mb-1">
+      <%= link_to_add_association 'Add Project', f, :projects, class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <div id="skills">
+    <h5 class="font-weight-bold">Add your skills</h5>
+    <%= f.fields_for :skills do |skill| %>
+      <div class="card rounded-0 mb-3">
+        <div class="card-body">
+          <%= render 'skill_fields', f: skill %>         
+        </div>
+      </div>
+    <% end %>
+    <div class="links mb-1">
+      <%= link_to_add_association 'Add skills', f, :skills, class: "btn btn-success" %>
+    </div>
+  </div>
+
+   <div id="hobbies">
+    <h5 class="font-weight-bold">Add your hobbies</h5>
+    <%= f.fields_for :hobbies do |hobby| %>
+      <div class="card rounded-0 mb-3">
+        <div class="card-body">
+          <%= render 'hobby_fields', f: hobby %>         
+        </div>
+      </div>
+    <% end %>
+    <div class="links mb-1">
+      <%= link_to_add_association 'Add hobbies', f, :hobbies, class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary btn-lg' %>
+    <%= link_to 'Back', resumes_path, class: 'btn btn-outline-primary btn-lg' %>
+  </div>
+<% end %>
+
+
+<div class="modal fade" id="suggestionBox" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content rounded-0">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">How to write better objectives</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <h6 class="font-weight-bold">What is a Resume Objective?</h6>
+          <p class="font-14">A resume objective is a statement of your goals for employment, usually listed at the top of your resume. A resume objective is typically one or two sentences long.</p>
+          <p class="font-14">The most effective objective is one that is tailored to the job you are applying for. It states what kind of career you are seeking, and what skills and experiences you have that make you ideal for that career. A resume objective might also include where you have been and where you want to go in your career.</p>
+          <p class="font-14">For example, it might state some of your past accomplishments, and then move on to the kinds of accomplishments you hope to achieve in the future (ideally, accomplishments you want to achieve for the company you are applying to).</p>
+          <p class="font-14">Ultimately, stating an objective is optional, but it can help convince employers that you know what you want and are familiar with the industry.</p>
+        </div>
+        <div class="mb-3">
+          <h6 class="font-weight-bold">When to Use a Resume Objective?</h6>
+          <p class="font-14">Again, some career experts find resume objectives outdated. However, there are times when a resume objective can be very useful. Whenever you want to emphasize that you are ambitious, that you know what you want in a career, or that you have the skills for the specific job, you could benefit from a resume objective.</p>
+          <p class="font-14">A resume objective can explain why you are qualified for the job, even if you do not have a lot of related experience.</p>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="font-weight-bold">How to Write a Strong Resume Objective?</h6>
+          <p class="font-14">If you include an objective in your resume, it's important to customize the resume objective to match the position you are applying for. The more specific you are, the better chance you have of being considered for the job you are interested in. It is a good idea to write a new resume objective for each job you apply for.</p>
+          <p class="font-14">When you’re crafting your resume objective, you should focus on particular skills and experiences that are directly related to the job. Another effective strategy is to include keywords from the job listing in your resume objective. Not only can this increase the chances of your resume getting picked up by a company’s applicant tracking system; it can also emphasize how your qualifications align with the job listing.</p>
+          <p class="font-14">You should also only state career goals that are feasible within the company. For example, if you ultimately want to become a managing editor at a magazine, but you are applying for a job at a newspaper, do not state this. Focus on how you want to grow within the company.</p>
+          <p class="font-14">One of the dangers of a resume objective is that you can focus too much on what you want in your career, and not enough on how you will add value to the company. Therefore, while your resume objective should include information on the career that you want, you also want to explain why you are an ideal candidate for the job. Briefly include any information that highlights your experience, including your years in the industry, your particular skill set, and any other qualifications. Include examples of ways you could add value or even improve the company.</p>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="font-weight-bold">Sample Resume Objective Statements</h6>
+          <ul class="font-14">
+            <li>Seeking a position at XYZ Company where I can maximize my 10+ years of management, quality assurance, program development, and training experience.</li>
+            <li>Seeking a position as a clinical practice assistant for a health maintenance organization, utilizing my award-winning writing, research, and leadership skills.</li>
+            <li>Elementary education teacher looking for a position at a small independent school, where I can apply my five years of teaching experience and my curriculum development skills.</li>
+            <li>Customer service manager seeking an opportunity to use my customer service and management skills to improve customer satisfaction.</li>
+            <li>Looking for a position where I can integrate strategies to develop and expand existing customer sales, brand and product evolution, and media endorsement.</li>
+            <li>Search engine optimization position where I can use my SEO skills and experience to increase site traffic and search engine placement, and apply my 15 years of IT experience.</li>
+            <li>To obtain a position that will enable me to use my strong organizational skills, award-winning educational background, and ability to work well with people.</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
