@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
   <div class="form-group mt-2">
     <%= f.label :Images %>
     <%= f.file_field :image %>

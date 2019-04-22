@@ -1,8 +1,67 @@
 <div class="jumbotron">
-  <h1 class="display-4">Build your resume @ <span class="text-primary">Resume Builder</span></h1>
-  <p class="lead">Create attractive resumes here.</p>
-  <hr class="my-4">
-  <p class="lead">
-    <%= link_to "Build New Resume", new_resume_path, class: "btn btn-primary btn-lg" %>
-  </p>
+  <div class="background">
+    <h1 class="display-4">Build your resume @ <span class="text-primary">Resume Builder</span></h1>
+    <p class="lead">Create attractive resumes here.</p>
+    <hr class="my-4">
+    <p class="lead">
+      <%= link_to "Build New Resume", new_resume_path, class: "btn btn-primary btn-lg" %>
+    </p>
+  </div>
 </div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 mx-md-auto">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card rounded-0">
+            <div class="card-body text-center">
+              <h1 class="mb-2">1000+</h1>
+              <h3 class="mb-3">Registered Users</h3>
+              <% if user_signed_in? %>
+                <%= link_to "Including You", "javascript:void(0)", class: 'btn btn-dark' %>
+              <% else %>
+                <%= link_to "Be the Next One", new_user_registration_path, class: 'btn btn-dark' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card rounded-0">
+            <div class="card-body text-center">
+              <h1 class="mb-2">10000+</h1>
+              <h3 class="mb-3">Resumes</h3>
+              <% if user_signed_in? && current_user.resumes.present? %>
+                <%= link_to "Including #{current_user.resumes.count} yours", new_resume_path, class: 'btn btn-dark' %>
+              <% else %>
+                <%= link_to "Create Your First", new_resume_path, class: 'btn btn-dark' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="subscription-section mt-5 pt-4 pb-4">
+  <div class="col-md-12 mt-5 mb-4">
+    <div class="col-md-6 mx-md-auto text-center">
+      <h4 class="text-white mt-3 mb-3">Subscribe for our weekly news letter to get latest updates</h4>
+      <div class="input-group mb-3">
+        <input type="email" class="form-control form-control-lg" placeholder="Write your email here" aria-label="Write your email here" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-dark btn-lg" type="button">Subscribe Now <i class="fa fa-envelope"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style type="text/css">
+  .subscription-section {
+    width:100%;
+    min-height:120px;
+    background-color:#0679f9;
+  }
+</style>

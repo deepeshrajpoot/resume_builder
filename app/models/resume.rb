@@ -4,7 +4,7 @@ class Resume < ApplicationRecord
   has_many :projects, inverse_of: :resume
   has_many :skills, inverse_of: :resume
   has_many :hobbies, inverse_of: :resume
-  belongs_to :users, optional: :true
+  belongs_to :user, optional: :true
   accepts_nested_attributes_for :academic_credentials, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :achievements, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :projects, reject_if: :all_blank, allow_destroy: true

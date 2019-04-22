@@ -4,16 +4,29 @@
 	&#x2630;
   </button> 
 	<a class="navbar-brand navbar-color"
-	href="#">CFB</a>
+	href="/">Resume Builder</a>
 	<div id="navbar" class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
-			<li class="active nav-item"><a href="/" class="nav-link navbar-color" >Home</a>
+			<li class="active nav-item"><a href="/" class="nav-link navbar-color" ><i class="fa fa-home"></i> Home</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav ml-auto">
 			<% if user_signed_in? %>
-				<li class="nav-item"><%= link_to "Log Out", destroy_user_session_path, class: "nav-link", method: :delete %></li>
-				<li class="nav-item"><%= link_to "edit", edit_user_registration_path, class: "nav-link" %></li>
+				<li class="nav-item">
+					<%= link_to resumes_path, class: "nav-link" do %>
+						<i class="fa fa-book"></i> My Resumes
+					<% end %>		
+				</li>
+				<li class="nav-item">
+					<%= link_to destroy_user_session_path, class: "nav-link", method: :delete do %>
+						<i class="fa fa-sign-out"></i> Log Out
+					<% end %>		
+				</li>
+				<li class="nav-item">
+					<%= link_to edit_user_registration_path, class: "nav-link" do %>
+						<i class="fa fa-pencil"></i> Edit Profile
+					<% end %>
+				</li>
 			<% else %>
 				<li class="nav-item"><%= link_to "Log In", new_user_registration_path, class: "nav-link" %></li>
 			<% end %>
